@@ -40,21 +40,12 @@ def quebrarD(r, e):
             return d
     return None
 
-# def descriptografar(texto_cifrado, d, n):
-#     tamanho_bloco =int(math.log(n, 2))
-#     with open(texto_cifrado, "r") as arquivo:
-#         texto = arquivo.read()
-#         print(f"Texto cifrado: {texto}")
-#     for i in range(0, len(texto), tamanho_bloco):
-#         bloco_cifrado = texto[i:i + tamanho_bloco]
-#         print(f"Bloco cifrado: {bloco_cifrado}")
-#         texto_descriptografado = pow(int(bloco_cifrado), d) % n
-#         with open(os.path.join(os.path.dirname(__file__), "texto_descriptografado.txt"), "a") as arquivo:
-#             arquivo.write(str(texto_descriptografado))
-#     return texto_descriptografado
+def descriptografar(texto_cifrado, d, n):
+    texto_descriptografado = pow(int(texto_cifrado), d) % n 
+    return texto_descriptografado
 
 def main():
-    texto_cifrado = os.path.join(os.path.dirname(__file__), "texto_cifrado.txt")
+    texto_cifrado = input("Digite o texto cifrado: ")
     n = int(input("Digite o valor de N associado a chave: "))
     p, q = quebrarPeQ(n)
     e = int(input("Digite o valor de E associado a chave: "))
@@ -62,10 +53,7 @@ def main():
     print(f"Valor de R: {r}")
     d = quebrarD(r, e)
     print(f"Valor de D (Chave Privada): {d}")
-    # texto_descriptografado = descriptografar(texto_cifrado, d, n)
-    # with open(os.path.join(os.path.dirname(__file__), "texto_descriptografado.txt"), "r") as arquivo:
-    #     texto = arquivo.read()
-    #     print(f"Texto descriptografado: {texto}")
-
+    print(f"Texto descriptografado: {descriptografar(texto_cifrado, d, n)}")
+    
 if __name__ == "__main__":
     main()
